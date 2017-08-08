@@ -1,6 +1,6 @@
 version: '2'
 services:
-  activemq:
+  master:
     build:
       args:
         - http_proxy
@@ -8,3 +8,19 @@ services:
         - no_proxy
       context: .
     network_mode: host
+    ports:
+      - "8161:8161"
+    volumes:
+      - "${PWD}/broker1/activemq.xml:/opt/activemq/conf/activemq.xml"
+      - "${PWD}/broker1/log4j.properties:/opt/activemq/conf/log4j.properties"
+  slave:
+    build:
+      args:
+        - http_proxy
+        - https_proxy
+        - no_proxy
+      context: .
+    network_mode: host
+    volumes:
+      - "${PWD}/broker2:/opt/activemq/conf"
+      - "${PWD}/broker1/log4j.properties:/opt/activemq/conf/log4j.properties:ro"
