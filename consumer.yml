@@ -1,0 +1,19 @@
+version: '2'
+services:
+  consumer:
+    build:
+      args:
+        - http_proxy
+        - https_proxy
+        - no_proxy
+      context: client  
+    environment:
+      - http_proxy
+      - https_proxy
+      - HTTP_PROXY
+      - HTTPS_PROXY
+    # image: ruby:2.1
+    volumes:
+      - ${PWD}/client:/usr/src/myapp
+    working_dir: /usr/src/myapp
+    command: ruby consumer2.rb

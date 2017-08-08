@@ -21,7 +21,7 @@
 
       Take a look at ${ACTIVEMQ_HOME}/conf/jetty.xml for more details
     -->
-    <broker brokerName="zs94a-pp5mom.k94.kvk.nl" 
+    <broker brokerName="localhost" 
         xmlns="http://activemq.apache.org/schema/core" dataDirectory="${activemq.base}/data" persistent="false" useJmx="true">
         <sslContext>
             <sslContext keyStorePassword="puppet" keyStore="file:${activemq.base}/conf/broker.ks" trustStorePassword="puppet" trustStore="file:${activemq.base}/conf/broker.ts"></sslContext>
