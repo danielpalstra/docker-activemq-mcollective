@@ -1,0 +1,10 @@
+version: '2'
+services:
+  activemq:
+    build:
+      args:
+        - http_proxy
+        - https_proxy
+        - no_proxy
+      context: .
+    network_mode: host
