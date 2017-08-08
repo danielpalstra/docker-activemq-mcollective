@@ -7,8 +7,9 @@ services:
         - https_proxy
         - no_proxy
       context: .
-    network_mode: host
+    # network_mode: host
     ports:
+      - "61613:61613"
       - "8161:8161"
     volumes:
       - "${PWD}/broker1/activemq.xml:/opt/activemq/conf/activemq.xml"
@@ -20,7 +21,27 @@ services:
         - https_proxy
         - no_proxy
       context: .
-    network_mode: host
+    # network_mode: host
+    ports:
+      - "61614:61613"
+      - "8161"
     volumes:
-      - "${PWD}/broker2:/opt/activemq/conf"
+      - "${PWD}/broker2/activemq.xml:/opt/activemq/conf/activemq.xml"
       - "${PWD}/broker1/log4j.properties:/opt/activemq/conf/log4j.properties:ro"
+  consumer:
+    build:
+      args:
+        - http_proxy
+        - https_proxy
+        - no_proxy
+      context: client  
+    environment:
+      - http_proxy
+      - https_proxy
+      - HTTP_PROXY
+      - HTTPS_PROXY
+    # image: ruby:2.1
+    volumes:
+      - ${PWD}/client:/usr/src/myapp
+    working_dir: /usr/src/myapp
+    command: ruby consumer2.rb

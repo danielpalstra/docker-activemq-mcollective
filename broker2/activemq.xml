@@ -60,7 +60,7 @@
             Create a duplex connector to the first broker
         -->
         <networkConnectors>
-            <networkConnector uri="static:(tcp://localhost:61616)" duplex="true"/>
+            <networkConnector uri="static:(tcp://master:61616)" duplex="true"/>
         </networkConnectors>
 
         <persistenceAdapter>
@@ -84,7 +84,8 @@
 
         <!-- The transport connectors ActiveMQ will listen to -->
         <transportConnectors>
-            <transportConnector name="openwire" uri="tcp://0.0.0.0:61618"/>
+            <transportConnector name="openwire" uri="tcp://0.0.0.0:61616"/>
+            <transportConnector name="stomp" uri="stomp://0.0.0.0:61613"/>
         </transportConnectors>
 
     </broker>

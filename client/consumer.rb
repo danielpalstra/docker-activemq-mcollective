@@ -12,8 +12,12 @@ class ExampleConsumer
   # Run example.
   def run
     # client = Stomp::Client.new('failover://(stomp://:@localhost:61613,stomp://:@remotehost:61613)?initialReconnectDelay=5000&randomize=false&useExponentialBackOff=false')
+    # single
+    # client = Stomp::Client.new('stomp://:@localhost:61613')
+    client = Stomp::Client.new('stomp://:@master:61613')
+    # multiple
+    # client = Stomp::Client.new('failover://(stomp://:@master:61613,stomp://:@slave:61613)')
 
-    client = Stomp::Client.new('stomp://:@localhost:61613')
 
     puts 'Subscribing ronaldo'
     client.subscribe('/queue/ronaldo', :ack => 'client',
