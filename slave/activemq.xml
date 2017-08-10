@@ -33,7 +33,8 @@
     <!-- Allows us to use system properties as variables in this configuration file -->
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"/>
 
-    <broker xmlns="http://activemq.apache.org/schema/core" useJmx="true" brokerName="static-broker2" dataDirectory="${activemq.data}">
+    <broker xmlns="http://activemq.apache.org/schema/core" useJmx="true" 
+        useLocalHostBrokerName="true" dataDirectory="${activemq.data}">
 
         <!-- Destination specific policies using destination names or wildcards -->
         <destinationPolicy>

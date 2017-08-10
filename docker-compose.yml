@@ -3,7 +3,7 @@ services:
   master:
     image: danielpalstra/activemq:master
     ports:
-      - "61613:61613"
+      # - "61613:61613"
       - "8161:8161"
     labels:
       io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/slave
