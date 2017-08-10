@@ -5,14 +5,20 @@ services:
     ports:
       - "61613:61613"
       - "8161:8161"
+    labels:
+      io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/slave
+      io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/mcollective
   slave:
     image: danielpalstra/activemq:slave  
     # network_mode: host
     ports:
-      - "61614:61613"
+      # - "61614:61613"
       - "8161"
     depends_on: 
       - master
+    labels:
+      io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/master
+      io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/mcollective      
   mcollective:
     image: danielpalstra/mcollective
     command: '--no-daemonize'
@@ -20,3 +26,6 @@ services:
     depends_on: 
       - master
       - slave
+    labels:
+      io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/master
+      io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/slave

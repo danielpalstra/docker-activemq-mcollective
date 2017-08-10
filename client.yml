@@ -1,5 +1,0 @@
-version: '2'
-services:
-  mcollective:
-    image: puppet/puppet-agent
-    entrypoint: /opt/puppetlabs/puppet/bin/mcollectived --no-daemonize

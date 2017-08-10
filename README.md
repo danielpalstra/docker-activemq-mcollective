@@ -1,24 +1,22 @@
 # ActiveMQ
 
-Bron voor ActiveMQ Docker image: https://github.com/rmohr/docker-activemq
-Voorbeeld voor network of brokers configuratie: https://github.com/apache/activemq/blob/master/assembly/src/release/examples/conf/activemq-static-network-broker2.xml
-Network of brokers configuratie: http://activemq.apache.org/networks-of-brokers.html
+Testing a network of brokers of ActiveMQ with MCollective. Docker is used to test the scale of MCollective server instances.
 
 ## Compose files
 
-Compsoe files are split so building and local testing is seperated from running the activemq broker network. 
+Compose files are split so building and local testing is seperated from running the activemq broker network. 
 
 `docker-compose.yml`
 
-Contains the "master/slave" activemq broker network. Can be used in Rancher as well.
+Contains the "master/slave" activemq broker network. Also contains MCollective to test ActiveMQ at scale. The compose file can be used in Rancher as well.
 
 `development.yml`
 
 Contains the definitions to build the activemq and mcollective images so they can be used in any orchestration tool (like Rancher). `development.yml` can also be used to test/ debug locally since it mounts the config files.
 
-`clients.yml`
+`consumer.yml`
 
-Contains MCollective to test the network of activemq brokers
+Contains a ruby stomp client to test the network of activemq brokers
 
 ## Testing
 
@@ -51,3 +49,9 @@ docker-compose run --entrypoint=mco mcollective ping
 ```shell
 dc -f docker-compose.yml -f development.yml build
 ```
+
+## References
+
+* Inspiration for ActiveMQ Docker image: https://github.com/rmohr/docker-activemq
+* Samples for ActiveMQ Network of Brokers setup https://github.com/apache/activemq/blob/master/assembly/src/release/examples/conf/activemq-static-network-broker2.xml
+* Network of brokers configuration http://activemq.apache.org/networks-of-brokers.html

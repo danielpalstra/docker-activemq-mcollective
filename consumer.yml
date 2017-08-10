@@ -17,9 +17,3 @@ services:
       - ${PWD}/client:/usr/src/myapp
     working_dir: /usr/src/myapp
     command: ruby consumer2.rb
-  mcollective:
-    image: puppet/puppet-agent
-    entrypoint: /opt/puppetlabs/puppet/bin/mcollectived --no-daemonize
-    volumes:
-      - ${PWD}/mcollective/client.cfg:/etc/puppetlabs/mcollective/client.cfg:ro
-      - ${PWD}/mcollective/server.cfg:/etc/puppetlabs/mcollective/server.cfg:ro
