@@ -1,0 +1,63 @@
+version: '2'
+services:
+  master:
+    image: danielpalstra/activemq:master
+    build:
+      args:
+        - http_proxy
+        - https_proxy
+        - no_proxy
+        - ACTIVEMQ_BROKER_ROLE=master
+      context: .
+    # network_mode: host
+    ports:
+      - "61613:61613"
+      - "8161:8161"
+    volumes:
+      - "${PWD}/master/activemq.xml:/opt/activemq/conf/activemq.xml"
+      - "${PWD}/master/log4j.properties:/opt/activemq/conf/log4j.properties"
+  slave:
+    image: danielpalstra/activemq:slave  
+    build:
+      args:
+        - http_proxy
+        - https_proxy
+        - no_proxy
+        - ACTIVEMQ_BROKER_ROLE=slave
+      context: .
+    # network_mode: host
+    ports:
+      - "61614:61613"
+      - "8161"
+    volumes:
+      - "${PWD}/slave/activemq.xml:/opt/activemq/conf/activemq.xml"
+      - "${PWD}/master/log4j.properties:/opt/activemq/conf/log4j.properties:ro"
+  consumer:
+    build:
+      args:
+        - http_proxy
+        - https_proxy
+        - no_proxy
+      context: client
+    environment:
+      - http_proxy
+      - https_proxy
+      - HTTP_PROXY
+      - HTTPS_PROXY
+    # image: ruby:2.1
+    volumes:
+      - ${PWD}/client:/usr/src/myapp
+    working_dir: /usr/src/myapp
+    command: ruby consumer2.rb
+  mcollective:
+    build:
+      args:
+        - http_proxy
+        - https_proxy
+        - no_proxy
+      context: mcollective  
+    image: danielpalstra/mcollective
+    command: '--no-daemonize'
+    volumes:
+      - ${PWD}/mcollective/client.cfg:/etc/puppetlabs/mcollective/client.cfg:ro
+      - ${PWD}/mcollective/server.cfg:/etc/puppetlabs/mcollective/server.cfg:ro
