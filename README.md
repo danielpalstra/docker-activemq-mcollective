@@ -37,7 +37,7 @@ docker-compose run --entrypoint=mco mcollective ping
 Scale the mco instances
 
 ```shell
-docker-compose up --scale mcollective=10
+docker-compose up --scale mcollective=10 -d
 ```
 
 Run another `mco ping`
@@ -48,3 +48,6 @@ docker-compose run --entrypoint=mco mcollective ping
 
 ## Building
 
+```shell
+dc -f docker-compose.yml -f development.yml build
+```
