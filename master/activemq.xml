@@ -94,7 +94,7 @@
         <!-- The transport connectors ActiveMQ will listen to -->
         <transportConnectors>
             <transportConnector name="openwire" uri="tcp://0.0.0.0:61616"/>
-            <!-- <transportConnector name="stomp" uri="stomp://0.0.0.0:61613"/> -->
+            <transportConnector name="stomp" uri="stomp://0.0.0.0:61613"/> 
         </transportConnectors>
     </broker>
     

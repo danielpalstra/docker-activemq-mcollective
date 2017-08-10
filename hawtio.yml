@@ -1,0 +1,14 @@
+version: '2'
+services:
+  hawtio:
+    build:
+      context: hawtio
+      args:
+        - http_proxy
+        - https_proxy
+        - no_proxy
+    image: danielpalstra/hawtio
+    ports:
+      - '8090:8090'
+    # command: '-Dhawtio.authenticationEnabled=false --port 8090'
+    # docker run -p 9282:8080 -it fabric8/hawtio
