@@ -12,8 +12,8 @@ services:
       - "61613:61613"
       - "8161:8161"
     volumes:
-      - "${PWD}/broker1/activemq.xml:/opt/activemq/conf/activemq.xml"
-      - "${PWD}/broker1/log4j.properties:/opt/activemq/conf/log4j.properties"
+      - "${PWD}/master/activemq.xml:/opt/activemq/conf/activemq.xml"
+      - "${PWD}/master/log4j.properties:/opt/activemq/conf/log4j.properties"
   slave:
     build:
       args:
@@ -26,8 +26,8 @@ services:
       - "61614:61613"
       - "8161"
     volumes:
-      - "${PWD}/broker2/activemq.xml:/opt/activemq/conf/activemq.xml"
-      - "${PWD}/broker1/log4j.properties:/opt/activemq/conf/log4j.properties:ro"
+      - "${PWD}/slave/activemq.xml:/opt/activemq/conf/activemq.xml"
+      - "${PWD}/master/log4j.properties:/opt/activemq/conf/log4j.properties:ro"
   consumer:
     build:
       args:
