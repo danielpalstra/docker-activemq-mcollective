@@ -1,6 +1,6 @@
 # ActiveMQ
 
-Testing a network of brokers of ActiveMQ with MCollective. Docker is used to test the scale of MCollective server instances.
+Testing a network of brokers of ActiveMQ with MCollective. Docker is used to test the scale of MCollective server instances. The MCollective server connects to the slave(s). Mco client connects to the master to make sure all connected agents receive the messages.
 
 ## Compose files
 
@@ -55,3 +55,4 @@ dc -f docker-compose.yml -f development.yml build master slave mcollective
 * Inspiration for ActiveMQ Docker image: https://github.com/rmohr/docker-activemq
 * Samples for ActiveMQ Network of Brokers setup https://github.com/apache/activemq/blob/master/assembly/src/release/examples/conf/activemq-static-network-broker2.xml
 * Network of brokers configuration http://activemq.apache.org/networks-of-brokers.html
+* Description on setting up the right connections within a network of brokers: https://access.redhat.com/documentation/en-US/Fuse_ESB_Enterprise/7.1/html/Using_Networks_of_Brokers/files/FMQNetworksConnectors.html
