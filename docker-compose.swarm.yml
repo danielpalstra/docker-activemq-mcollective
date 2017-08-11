@@ -1,0 +1,14 @@
+version: '3'
+services:
+  master:
+    image: registry.kvk.nl/zmm-infra/puppet-activemq:cps-master
+    ports:
+      - "61613:61613"
+      - "8161:8161"
+  slave:
+    image: registry.kvk.nl/zmm-infra/puppet-activemq:cps-slave
+    ports:
+      - "61613:61613"
+      - "8161:8161"
+    depends_on: 
+      - master

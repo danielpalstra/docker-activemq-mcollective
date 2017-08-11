@@ -1,0 +1,21 @@
+version: '3'
+services:
+  master:
+    image: registry.kvk.nl/zmm-infra/puppet-activemq:cps-master
+    build:
+      args:
+        - http_proxy
+        - https_proxy
+        - no_proxy
+        - ACTIVEMQ_BROKER_ROLE=master
+      context: .
+  slave:
+    image: registry.kvk.nl/zmm-infra/puppet-activemq:cps-slave
+    build:
+      args:
+        - http_proxy
+        - https_proxy
+        - no_proxy
+        - ACTIVEMQ_BROKER_ROLE=slave
+      context: .
+    
