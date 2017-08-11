@@ -43,6 +43,10 @@
 
     <broker xmlns="http://activemq.apache.org/schema/core" useJmx="true" brokerName="master" 
         dataDirectory="${activemq.data}">
+        <sslContext>
+            <sslContext keyStorePassword="puppet" keyStore="file:${activemq.base}/conf/broker.ks" trustStorePassword="puppet" trustStore="file:${activemq.base}/conf/broker.ts"></sslContext>
+        </sslContext>
+        
 
         <!-- Destination specific policies using destination names or wildcards -->
         <destinationPolicy>
@@ -94,7 +98,8 @@
         <!-- The transport connectors ActiveMQ will listen to -->
         <transportConnectors>
             <transportConnector name="openwire" uri="tcp://0.0.0.0:61616"/>
-            <transportConnector name="stomp" uri="stomp://0.0.0.0:61613"/> 
+            <!-- <transportConnector name="stomp" uri="stomp://0.0.0.0:61613"/>  -->
+            <transportConnector name="stomp+ssl" uri="stomp+ssl://0.0.0.0:61613?transport.enabledProtocols=TLSv1,TLSv1.1,TLSv1.2&amp;maximumConnections=10000&amp;wireFormat.maxFrameSize=104857600"></transportConnector>
         </transportConnectors>
     </broker>
     
