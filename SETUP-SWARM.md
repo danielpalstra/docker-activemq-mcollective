@@ -1,6 +1,6 @@
 # Swarm setup
 
-Maak een Docker Swarm aan om de ActiveMQ brokers met elkaar te laten communiceren
+Maak een Docker Swarm aan om de ActiveMQ brokers met elkaar te laten communiceren.
 
 Gebruikte docs:
 * [Swarm cluster opzetten](https://docs.docker.com/engine/swarm/swarm-tutorial/)
@@ -16,9 +16,9 @@ docker swarm init --advertise-addr 10.9.27.2
 output:
 
 ```
-    docker swarm join \
-    --token SWMTKN-1-1dv8r23jrzca8hcwss8go2geu6qermtb9qagerwu5v41lhh77l-3z9aolbdhr9mi2kapdri2p8yl \
-    10.9.27.2:2377
+docker swarm join \
+--token SWMTKN-1-1dv8r23jrzca8hcwss8go2geu6qermtb9qagerwu5v41lhh77l-3z9aolbdhr9mi2kapdri2p8yl \
+10.9.27.2:2377
 ```
 
 ### Nodes beheren
@@ -46,4 +46,10 @@ Clone de git repo
 
 ```shell
 git clone http://git.k94.kvk.nl/zmm-infra/puppet-activemq.git activemq
+```
+
+Deploy de stack
+
+```shell
+docker stack deploy --with-registry-auth --compose-file=docker-compose.swarm.yml activemq
 ```

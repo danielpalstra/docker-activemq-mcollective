@@ -2,4 +2,7 @@
 
 Stappen nog te doen. 
 
-* Fixed ip regelen voor een Docker Swarm manager
+* Authenticatie aanzetten voor ActiveMQ
+* Wachtwoorden wijzigen voor standaard users
+* Monitoring ontwerpen (Jolokia gebruiken)
+* Fixed ip regelen voor een Docker Swarm manager (optioneel?)
