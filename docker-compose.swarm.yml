@@ -5,10 +5,18 @@ services:
     ports:
       - "61613:61613"
       - "8161:8161"
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
   slave:
     image: registry.kvk.nl/zmm-infra/puppet-activemq:cps-slave
     ports:
-      - "61613:61613"
-      - "8161:8161"
+      - "61614:61613"
+      - "8162:8161"
+    deploy:
+      placement:
+        constraints:
+          - node.role != manager
     depends_on: 
       - master
