@@ -19,6 +19,8 @@ services:
     environment:
       - "ACTIVEMQ_OPTS=-Xms3g -Xmx3g"
     deploy:
+      mode: replicated
+      replicas: 2
       placement:
         constraints:
           - node.role != manager
