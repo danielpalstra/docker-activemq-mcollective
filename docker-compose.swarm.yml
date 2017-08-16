@@ -5,6 +5,8 @@ services:
     ports:
       - "61613:61613"
       - "8161:8161"
+    environment:
+      - "ACTIVEMQ_OPTS=-Xms1g -Xmx1g"
     deploy:
       placement:
         constraints:
@@ -14,6 +16,8 @@ services:
     ports:
       - "61614:61613"
       - "8162:8161"
+    environment:
+      - "ACTIVEMQ_OPTS=-Xms3g -Xmx3g"
     deploy:
       placement:
         constraints:

@@ -8,6 +8,8 @@ services:
     labels:
       io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/slave
       io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/mcollective
+    environment:
+      - "ACTIVEMQ_OPTS=-Xms1g -Xmx1g"
   slave:
     image: danielpalstra/activemq:slave  
     # network_mode: host
@@ -19,6 +21,8 @@ services:
     labels:
       io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/master
       io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/mcollective      
+    environment:
+      - "ACTIVEMQ_OPTS_MEMORY=-Xms3g -Xmx3g"
   mcollective:
     image: danielpalstra/mcollective
     command: '--no-daemonize'
